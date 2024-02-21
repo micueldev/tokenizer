@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-tokenizer-service
+spec:
+  selector:
+    app: app-tokenizer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 3000
+  type: NodePort

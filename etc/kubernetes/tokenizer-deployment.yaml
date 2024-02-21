@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-tokenizer-deployment
+  labels:
+    app: app-tokenizer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-tokenizer
+  template:
+    metadata:
+      labels:
+        app: app-tokenizer
+    spec:
+      containers:
+      - name: app-tokenizer
+        image: public.ecr.aws/e4e3n7g2/tokenizer-mcueva:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: NODE_ENV
+          value: "development"
+        - name: HEADER_KEY_API_KEY
+          value: "x-api-key"
+        - name: API_KEY
+          value: "pk_test_LsRBKejzCOEEWOsw"
+        - name: TOKEN_KEY
+          value: "secret"
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_TTL_SECONDS
+          value: "0"
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            httpHeaders:
+              - name: x-api-key
+                value: "pk_test_LsRBKejzCOEEWOsw"
+            path: /api/health
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            memory: 1Gi
+            cpu : 1
+          requests:
+            memory: 512Mi
+            cpu : 0.5m
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
