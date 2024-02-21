@@ -63,7 +63,7 @@ $ node dist/main
 
 ## Tests
 <p>
-  This microservice has unit tests and e2e tests
+  This microservice has unit tests, integration tests and e2e tests
 </p>
 
 ```bash
@@ -72,6 +72,9 @@ $ npm run test
 
 # unit tests
 $ npm run test:unit
+
+# integration tests
+$ npm run test:integration
 
 # e2e tests
 $ npm run test:e2e

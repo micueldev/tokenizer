@@ -1,6 +1,6 @@
 import { CACHE_CARD_PROVIDER_ALIAS } from '../../domain/cache-card.provider';
 import { TOKEN_CARD_PROVIDER_ALIAS } from '../../domain/token-card.provider';
-import { ManagerCacheCardProvider } from './cache-manager-card.provider';
+import { ManagerCacheCardProvider } from './manager-cache-card.provider';
 import { JwtTokenProvider } from './jwt-token.provider';
 
 export const Providers = [
